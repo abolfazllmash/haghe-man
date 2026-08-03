@@ -1,0 +1,128 @@
+{
+  "1405": {
+    "minimum_daily_wage": 5541850,
+    "housing_allowance": 30000000,
+    "food_allowance": 22000000,
+    "marital_allowance": 5000000,
+    "seniority_base_daily": 166667,
+    "child_allowance_multiplier": 3,
+    "overtime_multiplier": 1.4,
+    "night_shift_rate": 0.35,
+    "friday_rate": 0.4,
+    "shift_work": {
+      "morning_evening": 0.10,
+      "morning_evening_night": 0.15,
+      "two_shift_with_night": 0.225
+    },
+    "insurance_employee_rate": 0.07,
+    "insurance_employer_rate": 0.23,
+    "daily_work_hours": 7.333333333333333,
+    "annual_leave_days": 26,
+    "tax_brackets": [
+      { "from": 0, "to": 400000000, "rate": 0.0 },
+      { "from": 400000000, "to": 800000000, "rate": 0.10 },
+      { "from": 800000000, "to": 1000000000, "rate": 0.15 },
+      { "from": 1000000000, "to": 1200000000, "rate": 0.20 },
+      { "from": 1200000000, "to": 1400000000, "rate": 0.25 },
+      { "from": 1400000000, "to": 999999999999, "rate": 0.30 }
+    ],
+    "unemployment": {
+      "benefit_rate": 0.55,
+      "dependent_rate": 0.10,
+      "max_dependents": 4,
+      "cap_rate_of_average": 0.80,
+      "min_insurance_months": 6,
+      "min_months_if_contract_expiry": 12,
+      "duration_table": [
+        { "from": 6,   "to": 24,   "single": 6,  "married": 12 },
+        { "from": 25,  "to": 120,  "single": 12, "married": 18 },
+        { "from": 121, "to": 180,  "single": 18, "married": 26 },
+        { "from": 181, "to": 240,  "single": 26, "married": 36 },
+        { "from": 241, "to": null, "single": 36, "married": 50 }
+      ]
+    },
+    "source_note": "مصوبه شورای عالی کار، جلسه ۱۴۰۴/۱۲/۲۴، ابلاغ‌شده توسط وزارت کار (ارقام به ریال)"
+  },
+  "1404": {
+    "minimum_daily_wage": 3020000,
+    "housing_allowance": 9000000,
+    "food_allowance": 18000000,
+    "child_allowance_multiplier": 3,
+    "overtime_multiplier": 1.4,
+    "night_shift_rate": 0.35,
+    "friday_rate": 0.4,
+    "shift_work": {
+      "morning_evening": 0.10,
+      "morning_evening_night": 0.15,
+      "two_shift_with_night": 0.225
+    },
+    "insurance_employee_rate": 0.07,
+    "insurance_employer_rate": 0.23,
+    "daily_work_hours": 7.33,
+    "annual_leave_days": 26,
+    "tax_brackets": [
+      { "from": 0, "to": 200000000, "rate": 0.0 },
+      { "from": 200000000, "to": 250000000, "rate": 0.10 },
+      { "from": 250000000, "to": 320000000, "rate": 0.15 },
+      { "from": 320000000, "to": 420000000, "rate": 0.20 },
+      { "from": 420000000, "to": 999999999999, "rate": 0.25 }
+    ],
+    "unemployment": {
+      "benefit_rate": 0.55,
+      "dependent_rate": 0.10,
+      "max_dependents": 4,
+      "cap_rate_of_average": 0.80,
+      "min_insurance_months": 6,
+      "min_months_if_contract_expiry": 12,
+      "duration_table": [
+        { "from": 6,   "to": 24,   "single": 6,  "married": 12 },
+        { "from": 25,  "to": 120,  "single": 12, "married": 18 },
+        { "from": 121, "to": 180,  "single": 18, "married": 26 },
+        { "from": 181, "to": 240,  "single": 26, "married": 36 },
+        { "from": 241, "to": null, "single": 36, "married": 50 }
+      ]
+    },
+    "source_note": "بخشنامه مزد شورای عالی کار سال ۱۴۰۴ (ارقام به ریال)"
+  },
+  "1403": {
+    "minimum_daily_wage": 2388728,
+    "housing_allowance": 9000000,
+    "food_allowance": 14000000,
+    "child_allowance_multiplier": 3,
+    "overtime_multiplier": 1.4,
+    "night_shift_rate": 0.35,
+    "friday_rate": 0.4,
+    "shift_work": {
+      "morning_evening": 0.10,
+      "morning_evening_night": 0.15,
+      "two_shift_with_night": 0.225
+    },
+    "insurance_employee_rate": 0.07,
+    "insurance_employer_rate": 0.23,
+    "daily_work_hours": 7.33,
+    "annual_leave_days": 26,
+    "tax_brackets": [
+      { "from": 0, "to": 120000000, "rate": 0.0 },
+      { "from": 120000000, "to": 165000000, "rate": 0.10 },
+      { "from": 165000000, "to": 270000000, "rate": 0.15 },
+      { "from": 270000000, "to": 400000000, "rate": 0.20 },
+      { "from": 400000000, "to": 999999999999, "rate": 0.30 }
+    ],
+    "unemployment": {
+      "benefit_rate": 0.55,
+      "dependent_rate": 0.10,
+      "max_dependents": 4,
+      "cap_rate_of_average": 0.80,
+      "min_insurance_months": 6,
+      "min_months_if_contract_expiry": 12,
+      "duration_table": [
+        { "from": 6,   "to": 24,   "single": 6,  "married": 12 },
+        { "from": 25,  "to": 120,  "single": 12, "married": 18 },
+        { "from": 121, "to": 180,  "single": 18, "married": 26 },
+        { "from": 181, "to": 240,  "single": 26, "married": 36 },
+        { "from": 241, "to": null, "single": 36, "married": 50 }
+      ]
+    },
+    "source_note": "بخشنامه مزد شورای عالی کار سال ۱۴۰۳ (ارقام به ریال)"
+  }
+}
