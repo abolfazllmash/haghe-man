@@ -635,30 +635,6 @@ fun ModuleCalculatorScreen(
                     )
                 }
 
-                CalculationType.NET_GROSS_CONVERTER -> {
-                    CurrencyInputField(
-                        value = targetNetInput,
-                        onValueChange = { targetNetInput = it },
-                        label = "مبلغ خالص پرداختی مورد نظر",
-                        currencyUnit = currencyUnit,
-                        usePersianDigits = usePersianDigits
-                    )
-                    CurrencyInputField(
-                        value = housingAllowanceInput,
-                        onValueChange = { housingAllowanceInput = it },
-                        label = "حق مسکن",
-                        currencyUnit = currencyUnit,
-                        usePersianDigits = usePersianDigits
-                    )
-                    CurrencyInputField(
-                        value = foodAllowanceInput,
-                        onValueChange = { foodAllowanceInput = it },
-                        label = "بن کارگری / خواروبار",
-                        currencyUnit = currencyUnit,
-                        usePersianDigits = usePersianDigits
-                    )
-                }
-
                 CalculationType.UNEMPLOYMENT -> {
                     Text(
                         text = "۱. اطلاعات مالی و حقوق",
@@ -915,17 +891,6 @@ fun ModuleCalculatorScreen(
                         currencyUnit = currencyUnit
                     )
                     Pair(res.employeeInsurance, res.stepByStep)
-                }
-                CalculationType.NET_GROSS_CONVERTER -> {
-                    val res = LaborCalculators.calculateNetToGross(
-                        targetNet = targetNetRial,
-                        housingAllowance = housingRial,
-                        foodAllowance = foodRial,
-                        childCount = childCount,
-                        constants = constants,
-                        currencyUnit = currencyUnit
-                    )
-                    Pair(res.requiredGrossWage, res.stepByStep)
                 }
                 CalculationType.UNEMPLOYMENT -> Pair(0L, "")
             }

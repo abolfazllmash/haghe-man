@@ -27,7 +27,6 @@ private fun lightAccentFor(type: CalculationType): ModuleAccent = when (type) {
     CalculationType.OVERTIME_SHIFTS -> ModuleAccent(ModuleTealBg, ModuleTealTint)
     CalculationType.TAX -> ModuleAccent(ModuleOliveBg, ModuleOliveTint)
     CalculationType.INSURANCE -> ModuleAccent(ModuleRoseBg, ModuleRoseTint)
-    CalculationType.NET_GROSS_CONVERTER -> ModuleAccent(ModuleCyanBg, ModuleCyanTint)
     CalculationType.UNEMPLOYMENT -> ModuleAccent(ModuleIndigoBg, ModuleIndigoTint)
 }
 

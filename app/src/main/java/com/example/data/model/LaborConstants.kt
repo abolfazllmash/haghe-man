@@ -135,14 +135,6 @@ enum class CalculationType(
         estimatedSeconds = 30,
         inputCount = 2
     ),
-    NET_GROSS_CONVERTER(
-        title = "تبدیل خالص به ناخالص",
-        description = "محاسبه معکوس حقوق ناخالص مورد نیاز برای خالص دلخواه",
-        iconName = "swap_horiz",
-        shortDescription = "محاسبه معکوس حقوق",
-        estimatedSeconds = 45,
-        inputCount = 2
-    ),
     BONUS_EIDI(
         title = "عیدی و پاداش",
         description = "محاسبه عیدی سالانه با احتساب سقف قانونی و روزهای کارکرد",

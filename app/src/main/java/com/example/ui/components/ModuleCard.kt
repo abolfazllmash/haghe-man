@@ -59,7 +59,6 @@ fun iconForModule(calculationType: CalculationType): ImageVector = when (calcula
     CalculationType.OVERTIME_SHIFTS -> Icons.Default.Schedule
     CalculationType.TAX -> Icons.Default.AccountBalance
     CalculationType.INSURANCE -> Icons.Default.HealthAndSafety
-    CalculationType.NET_GROSS_CONVERTER -> Icons.Default.SwapHoriz
     CalculationType.UNEMPLOYMENT -> Icons.Default.WorkHistory
 }
 
