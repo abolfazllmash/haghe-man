@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -52,15 +53,28 @@ class MainActivity : ComponentActivity() {
             var currentTab by remember { mutableStateOf(NavTab.CALCULATE) }
             var showModulePicker by remember { mutableStateOf(false) }
 
+            // پشته‌ی تاریخچه‌ی تب‌ها برای بازگشت «یک مرحله عقب» با دکمه‌ی بک نیتیو.
+            val tabBackStack = remember { mutableStateListOf<NavTab>() }
+
+            // هنگام تغییر تب، تب فعلی در پشته ذخیره می‌شود تا بک بتواند به آن بازگردد.
+            fun navigateToTab(target: NavTab) {
+                if (target != currentTab) {
+                    tabBackStack.add(currentTab)
+                    currentTab = target
+                }
+            }
+
             val context = LocalContext.current
 
             HaghEManTheme(darkModeTheme = userPreferences.darkModeTheme) {
-                // Sub-screens under "بیشتر" fall back to the More list on back press.
-                BackHandler(enabled = activeModule == null && currentTab != NavTab.CALCULATE) {
-                    currentTab = when (currentTab) {
-                        NavTab.PROFILES, NavTab.SETTINGS -> NavTab.MORE
-                        else -> NavTab.CALCULATE
-                    }
+                // ۱) داخل یک ماژول محاسبه: بک نیتیو به لیست برمی‌گردد (نه خروج از اپ).
+                BackHandler(enabled = activeModule != null) {
+                    viewModel.selectModule(null)
+                }
+
+                // ۲) اگر تاریخچه‌ی تب داریم: بک نیتیو دقیقاً به تب قبلی می‌رود (یک مرحله عقب).
+                BackHandler(enabled = activeModule == null && tabBackStack.isNotEmpty()) {
+                    currentTab = tabBackStack.removeAt(tabBackStack.lastIndex)
                 }
 
                 Scaffold(
@@ -72,7 +86,7 @@ class MainActivity : ComponentActivity() {
                                     NavTab.PROFILES, NavTab.SETTINGS -> NavTab.MORE
                                     else -> currentTab
                                 },
-                                onTabSelected = { tab -> currentTab = tab },
+                                onTabSelected = { tab -> navigateToTab(tab) },
                                 onNewCalculation = { showModulePicker = true }
                             )
                         }
@@ -111,7 +125,7 @@ class MainActivity : ComponentActivity() {
                                     profilesList = profilesList,
                                     onYearSelected = { viewModel.selectYear(it) },
                                     onModuleClick = { viewModel.selectModule(it) },
-                                    onNavigateToProfiles = { currentTab = NavTab.PROFILES },
+                                    onNavigateToProfiles = { navigateToTab(NavTab.PROFILES) },
                                     onSaveProfile = { viewModel.saveUserProfile(it) },
                                     currencyUnit = userPreferences.currencyUnit,
                                     usePersianDigits = userPreferences.usePersianDigits,
@@ -120,8 +134,8 @@ class MainActivity : ComponentActivity() {
                                 )
 
                                 NavTab.MORE -> MoreScreen(
-                                    onNavigateToProfiles = { currentTab = NavTab.PROFILES },
-                                    onNavigateToSettings = { currentTab = NavTab.SETTINGS },
+                                    onNavigateToProfiles = { navigateToTab(NavTab.PROFILES) },
+                                    onNavigateToSettings = { navigateToTab(NavTab.SETTINGS) },
                                     onShareApp = {
                                         val share = Intent(Intent.ACTION_SEND).apply {
                                             type = "text/plain"
