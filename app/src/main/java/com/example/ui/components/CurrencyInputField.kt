@@ -21,12 +21,19 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.model.CurrencyUnit
@@ -60,6 +67,24 @@ fun CurrencyInputField(
     val formattedDisplayValue = if (value.isNotEmpty() && cleanNumeric >= 0) {
         PersianNumberFormatter.formatNumber(displayAmount, usePersianDigits, includeCommas = true)
     } else ""
+
+    // متن فیلد به‌همراه موقعیت مکان‌نما نگهداری می‌شود تا پس از درج جداکننده‌ی هزارگان
+    // مکان‌نما به ابتدای فیلد نپرد و ارقام بعدی برعکس وارد نشوند.
+    var fieldState by remember {
+        mutableStateOf(
+            TextFieldValue(formattedDisplayValue, TextRange(formattedDisplayValue.length))
+        )
+    }
+
+    // هر بار که مقدار قالب‌بندی‌شده تغییر می‌کند، متن هم‌گام و مکان‌نما به انتها منتقل می‌شود.
+    LaunchedEffect(formattedDisplayValue) {
+        if (fieldState.text != formattedDisplayValue) {
+            fieldState = TextFieldValue(
+                text = formattedDisplayValue,
+                selection = TextRange(formattedDisplayValue.length)
+            )
+        }
+    }
 
     Column(modifier = modifier.fillMaxWidth().padding(vertical = 4.dp)) {
         Row(
@@ -96,9 +121,11 @@ fun CurrencyInputField(
         }
 
         OutlinedTextField(
-            value = formattedDisplayValue,
+            value = fieldState,
             onValueChange = { input ->
-                val clean = PersianNumberFormatter.cleanNumberInput(input)
+                val clean = PersianNumberFormatter.cleanNumberInput(input.text)
+                // مکان‌نما موقتاً در انتهای متن تازه قرار می‌گیرد؛ سپس با مقدار قالب‌بندی‌شده هم‌گام می‌شود.
+                fieldState = input.copy(selection = TextRange(input.text.length))
                 if (clean.isEmpty()) {
                     onValueChange("")
                 } else {
