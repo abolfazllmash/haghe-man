@@ -63,6 +63,8 @@ fun HomeScreen(
     var searchVisible by remember { mutableStateOf(false) }
     var showYearSheet by remember { mutableStateOf(false) }
     var showSalarySheet by remember { mutableStateOf(false) }
+    // اگر حقوق از قبل ثبت شده باشد، پس از ذخیره‌ی مبلغ جدید مستقیماً به فیش حقوقی می‌رویم.
+    var openPayslipAfterSave by remember { mutableStateOf(false) }
 
     val allModules = remember { CalculationType.values().toList() }
 
@@ -111,11 +113,10 @@ fun HomeScreen(
                     currencyUnit = currencyUnit,
                     usePersianDigits = usePersianDigits,
                     onPrimaryAction = {
-                        if ((activeProfile?.grossMonthlyWageRial ?: 0L) > 0L) {
-                            onModuleClick(CalculationType.PAYSLIP)
-                        } else {
-                            showSalarySheet = true
-                        }
+                        // چه ثبت اولیه و چه «محاسبه مجدد»: ابتدا شیت ثبت باز می‌شود
+                        // تا مبلغ جدید در پروفایل ذخیره شود، سپس محاسبه انجام می‌گیرد.
+                        openPayslipAfterSave = (activeProfile?.grossMonthlyWageRial ?: 0L) > 0L
+                        showSalarySheet = true
                     },
                     modifier = Modifier.padding(horizontal = 20.dp)
                 )
@@ -276,8 +277,15 @@ fun HomeScreen(
                     )
                 )
                 showSalarySheet = false
+                if (openPayslipAfterSave) {
+                    openPayslipAfterSave = false
+                    onModuleClick(CalculationType.PAYSLIP)
+                }
             },
-            onDismiss = { showSalarySheet = false }
+            onDismiss = {
+                showSalarySheet = false
+                openPayslipAfterSave = false
+            }
         )
     }
 }
