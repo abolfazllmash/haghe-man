@@ -140,7 +140,8 @@ fun SalaryEntrySheet(
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
-    var text by remember { mutableStateOf(initialValue) }
+    // کلید initialValue تضمین می‌کند با هر بار باز شدن شیت، مبلغ فعلی پروفایل بارگذاری شود.
+    var text by remember(initialValue) { mutableStateOf(initialValue) }
     val parsed = PersianNumberFormatter.parseToLong(text)
 
     ModalBottomSheet(
