@@ -48,7 +48,7 @@ enum class NavTab(val title: String, val icon: ImageVector) {
     CALCULATE("خانه", Icons.Default.Home),
     REFERENCE("مرجع", Icons.AutoMirrored.Filled.MenuBook),
     HISTORY("سوابق", Icons.Default.History),
-    MORE("بیشتر", Icons.Default.MoreHoriz),
+    MORE("پروفایل من", Icons.Default.MoreHoriz),
     PROFILES("پروفایل‌ها", Icons.Default.Badge),
     SETTINGS("تنظیمات", Icons.Default.Settings)
 }
